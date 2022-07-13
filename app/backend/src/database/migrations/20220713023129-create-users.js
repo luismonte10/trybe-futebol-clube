@@ -14,7 +14,7 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
-      emal: {
+      email: {
         type: Sequelize.STRING
       },
       password: {
