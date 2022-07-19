@@ -28,7 +28,7 @@ User.init({
     type: STRING,
     allowNull: false,
   },
-  ispasswordbn: {
+  password: {
     type: STRING,
   },
 }, {
