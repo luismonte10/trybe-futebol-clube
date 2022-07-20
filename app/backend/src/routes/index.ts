@@ -3,6 +3,6 @@ import login from './login.routes';
 
 const router = Router();
 
-router.post('/login', login);
+router.use('/login', login);
 
 export default router;
