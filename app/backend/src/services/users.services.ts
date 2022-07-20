@@ -1,15 +1,35 @@
+import * as jwt from 'jsonwebtoken';
 import generateJWT from '../utils/generageJWT';
-import Users from '../database/models/users';
-import { ILoginUser, IUser } from '../interfaces/users.interface';
+import User from '../database/models/users';
+import { ILoginUser } from '../interfaces/users.interface';
 
-const login = async (loginUser: ILoginUser) => {
-  const [user] = await Users.findAll({ where: { email: loginUser.email } });
+// const { JWT_SECRET } = process.env;
+const JWT_SECRET = 'jwt_secret';
 
-  const { password, ...userWithoutPassword } = user as IUser;
+const login = async (loginUser: ILoginUser): Promise<string> => {
+  const user = await User.findOne({
+    where: { email: loginUser.email },
+    attributes: { exclude: ['password'] },
+  });
 
-  const token = generateJWT(userWithoutPassword);
+  let token = '';
+
+  if (user) {
+    token = generateJWT(user);
+  }
 
   return token;
 };
 
-export default login;
+const validateToken = async (token: string) => {
+  const decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload;
+
+  return decoded.payload;
+};
+
+const userServices = {
+  login,
+  validateToken,
+};
+
+export default userServices;
