@@ -19,4 +19,16 @@ const createMatch = async (match: IMatch) => {
   return createdMatch;
 };
 
-export default { getAllMatches, createMatch };
+const finishMatch = async (id: number) => {
+  await Matches.update({ inProgress: false }, { where: { id } });
+};
+
+const updateMatch = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+  await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+
+  const updatedMatch = await Matches.findByPk(id);
+
+  return updatedMatch;
+};
+
+export default { getAllMatches, createMatch, finishMatch, updateMatch };
