@@ -7,4 +7,12 @@ const getAllMatches = async (_req: Request, res: Response) => {
   return res.status(200).json(matches);
 };
 
-export default { getAllMatches };
+const createMatch = async (req: Request, res: Response) => {
+  const match = { ...req.body, inProgress: true };
+
+  const createdMatch = await matchesService.createMatch(match);
+
+  return res.status(201).json(createdMatch);
+};
+
+export default { getAllMatches, createMatch };
