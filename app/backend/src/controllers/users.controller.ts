@@ -15,9 +15,9 @@ const validateToken = async (req: Request, res: Response) => {
 
   if (!authorization) return res.status(401).json({ message: 'Expired or invalid token' });
 
-  const user = await userServices.validateToken(authorization);
+  const role = await userServices.validateToken(authorization);
 
-  return res.status(200).json({ role: user.role });
+  return res.status(200).json({ role });
 };
 
 const userController = {

@@ -1,14 +1,12 @@
 import * as jwt from 'jsonwebtoken';
 import { IUser } from '../interfaces/users.interface';
 
-const JWT_SECRET = 'jwt_secret';
-
 const jwtConfig = {
   expiresIn: '24h',
 };
 
 const generateJWT = (payload: Omit <IUser, 'password'>) => {
-  const token = jwt.sign({ payload }, JWT_SECRET, jwtConfig);
+  const token = jwt.sign({ payload }, process.env.JWT_SECRET as string, jwtConfig);
 
   return token;
 };
