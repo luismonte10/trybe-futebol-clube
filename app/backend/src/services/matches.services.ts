@@ -2,13 +2,16 @@ import Teams from '../database/models/teams';
 import Matches from '../database/models/matches';
 import { IMatch } from '../interfaces/matches.interface';
 
-const getAllMatches = async () => {
+const getAllMatches = async (inProgress?: string) => {
   const matches = await Matches.findAll({
     include: [
       { model: Teams, as: 'teamHome', attributes: { exclude: ['id'] } },
       { model: Teams, as: 'teamAway', attributes: { exclude: ['id'] } },
     ],
   });
+
+  if (inProgress === 'true') return matches.filter((match) => match.inProgress === true);
+  if (inProgress === 'false') return matches.filter((match) => match.inProgress === false);
 
   return matches;
 };

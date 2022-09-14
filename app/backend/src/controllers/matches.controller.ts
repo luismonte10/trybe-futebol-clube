@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import matchesService from '../services/matches.services';
 
-const getAllMatches = async (_req: Request, res: Response) => {
-  const matches = await matchesService.getAllMatches();
+const getAllMatches = async (req: Request, res: Response) => {
+  const { inProgress } = req.query;
+
+  const matches = await matchesService.getAllMatches(inProgress?.toString());
 
   return res.status(200).json(matches);
 };
