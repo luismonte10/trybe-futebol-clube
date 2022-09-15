@@ -3,6 +3,22 @@ import Teams from '../database/models/teams';
 import Matches from '../database/models/matches';
 import { createLeaderboardHome } from '../utils/leaderboardHome';
 import { createLeaderboardAway } from '../utils/leaderboardAway';
+import createLeaderboard from '../utils/leaderboard';
+
+const getLeaderboard = async () => {
+  const teams = await Teams.findAll(
+    {
+      include: [
+        { model: Matches, as: 'teamHome', where: { inProgress: false } },
+        { model: Matches, as: 'teamAway', where: { inProgress: false } },
+      ],
+    },
+  );
+
+  const leaderboard = createLeaderboard(teams);
+
+  return leaderboard;
+};
 
 const getLeaderboardHome = async () => {
   const teams = await Teams.findAll(
@@ -32,4 +48,4 @@ const getLeaderboardAway = async () => {
   return leaderboardAway;
 };
 
-export default { getLeaderboardHome, getLeaderboardAway };
+export default { getLeaderboard, getLeaderboardHome, getLeaderboardAway };
