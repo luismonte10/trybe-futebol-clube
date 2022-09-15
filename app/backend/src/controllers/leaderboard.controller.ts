@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import leaderboardService from '../services/leaderboard.services';
 
-const getLeaderboard = async (_req: Request, res: Response) => {
-  const leaderboard = await leaderboardService.getLeaderboard();
+const getLeaderboardHome = async (_req: Request, res: Response) => {
+  const leaderboardHome = await leaderboardService.getLeaderboardHome();
 
-  return res.status(200).json(leaderboard);
+  return res.status(200).json(leaderboardHome);
 };
 
-export default { getLeaderboard };
+export default { getLeaderboardHome };
