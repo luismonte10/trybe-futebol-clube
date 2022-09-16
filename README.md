@@ -4,7 +4,7 @@
 
 # Sobre o projeto:
 
-O front-end foi diponibilizado pela equipe da Trybe. Portanto, fiquei responsavél por contruir uma API RESTful com um back-end dockerizado utilizando modelagem de dados através do Sequelize, respeitando regras de negócio providas no projeto e que pudesse ser consumida pelo front-end.
+O front-end foi diponibilizado pela equipe da Trybe. Portanto, fiquei responsavél por construir uma API RESTful com um back-end dockerizado utilizando modelagem de dados através do Sequelize, respeitando regras de negócio providas no projeto e que pudesse ser consumida pelo front-end.
 
 <strong>Nesse projeto você pode:</strong>
  - Acompanhar a <strong>classificação geral</strong> e também pode filtrar a classificação por <strong>mandantes</strong> ou <strong>visitantes</strong>
